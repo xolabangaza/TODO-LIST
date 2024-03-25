@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ body{
+    background-color: #9b8daa;
+ }
+ 
+
+ .container{
+    margin: auto;
+    width: 400px;
+    border: 2px solid rgb(144, 28, 155); 
+    border-radius: 10px; 
+    margin-top: 30px;
+    
+ }
+
+ .container:hover{
+    box-shadow: 10px 10px 10px 10px plum;
+ }
+
+ h1{
+    text-align: center;
+    color: rgb(133, 50, 128);
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 40px;
+ }
+ .input{
+    height: 50px;
+    width: 90%;
+    border-radius: 22px 0px 22px 1px; 
+    margin-left: 20px; 
+    margin-top: 5px;
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    border: 2px solid rgb(223, 83, 204);
+    
+ }
+ 
+ input:focus{
+    color: rgb(68, 12, 78);
+    
+ }
+ .button{
+    color: rgb(252, 252, 252);
+    background-color: #cbb9dd;
+    height: 40px; 
+    width: 90%; 
+    border: 2px solid rgb(223, 83, 204);  
+    border-radius: 20px 0px 18px 1px;;
+    margin-top: 15px; 
+    margin-left: 20px; 
+    margin-bottom: 10px; 
+ }
+
+ .button:hover{
+    background-color: #917fa3;
+    
+ }
+
+ 
+
+ /* ::-webkit-input-placeholder{
+    text-align: center;
+    color: rgb(194, 84, 166);
+ } */
+ label{
+    margin-left: 30px;
+    font-size: 20px;
+    color: rgb(53, 8, 49);
+    font-style: oblique;
+
+ }
+ .under-thebutton{
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  
+ }
+ .under-thebutton a{
+    text-decoration: none;
+    color: rgb(184, 53, 184);
+ }
+ .under-thebutton a:hover{
+    color: rgb(80, 47, 95);
+ }
