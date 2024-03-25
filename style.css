@@ -1,1 +1,126 @@
-/* STYLE */
+*{
+    margin:  0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #9b8daa;
+}
+
+.account{
+    display: flex;
+    /* justify-content:space-between; */
+    margin: 1rem;
+}
+
+.search{
+    display: flex;
+    margin: auto;
+    height: 2.375rem;
+    width: 16.25rem;
+    border-radius: .625rem;
+}
+
+
+.account button{
+    background-color: rgb(115, 92, 141);
+    color: whitesmoke;
+    height: 2.2rem;
+    width: 6rem;
+    border-radius: 1rem;
+}
+
+
+.main{
+    box-shadow: 8px 8px 8px 8px;
+    width:50%;
+    height: 18.75rem;
+    background-color: white;
+    margin: auto;
+    border-radius: .625rem;
+}
+
+.div1, .div2{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.div2{
+    margin-top: 20px;
+}
+
+
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 6.25rem; */
+    min-height: 100vh;
+}
+
+
+
+h3{
+    text-align: center;
+    padding-bottom: 1.25rem;
+    padding-top: .625rem;
+    font-size: 30px;
+}
+
+.mybuttons{
+    border-radius: .625rem;
+    height: 2.1875rem;
+    width: 5.3125rem;
+    background-color:rgb(209, 184, 224);
+    box-shadow: .125rem .125rem .125rem .125rem;
+    margin-left: .625rem;
+    margin-right: .3125rem;
+}
+
+#mytask{
+    border-radius: .625rem;
+    height: 40px;
+    width: 200px;
+    margin-inline: 20px;
+}
+
+ul{
+    padding:1rem;
+     
+    
+}
+li{
+    list-style-type: none;
+    background-color:rgb(218, 223, 223);
+    margin-top: .625rem;
+    border-radius: .3125rem;
+    padding: .3125rem;
+    
+
+}
+
+ul li:hover {
+    background-color:rgb(209, 184, 224);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
