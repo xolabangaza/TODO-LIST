@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>To-Do-List</title>
+<title>Todo List</title>
 </head>
 <body>
     <div class="account">
@@ -17,31 +17,20 @@
     </div>
     <button class="logout">Logout</button>
     </div>
-    <div class="container">
-        <div class="main">
-            <h3>My To-Do List</h3>
-            <div class="div1">
-                <!-- <label class="d"><h4>TASK TITLE</h1></label> -->
-                <input type="text" id="mytask" placeholder="Add a title for your task">
-                <!-- <label class="d" for="Description">Description</label> -->
-                <input type="text" id="mytask" placeholder="Add Description for your task">
-            </div>
-            <div class="div2">    
-                <button class="mybuttons" onclick="sort()">Sort</button>
-                <!-- <label class="d" for="date">DUE DATE:</label>  -->
-                <input type="date" id="mytask" placeholder="Select  due date and time">
-                <button class="mybuttons" onclick="addTask()">Add Task</button>
-            </div>
-                <ul id="tasklist">
-                  <li class="list"></li> 
-                  <h4 class="title">Completed tasks:</h4>
-
-               </ul> 
-        
-        </div>
+  <div class="container">
+  <h1>Todo List</h1>
+  <div>
+      <input type="text" id="title" placeholder="Title">
+      <textarea id="description" placeholder="Description"></textarea>
+      <input type="date" id="dueDate">
+      <div class="myButtons">
+      <button onclick="addTask()">Add Task</button>
+      <button onclick="sortTask()">Sort Task</button>
     </div>
+  </div>
+     <ul id="taskList"></ul>
+</div>
 
-
-    <script src="index.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
