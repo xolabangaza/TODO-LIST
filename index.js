@@ -30,6 +30,8 @@ function displayTasks() {
       <strong>${task.title}</strong>
       <p>${task.description}</p>
       <p><em>Due Date: ${task.dueDate}</em></p>
+      <i onclick="editTask(${task.id})" class="fa-solid fa-pen-to-square fa-lg"></i>
+      <i onclick="deleteTask(${task.id})" class="fa-solid fa-trash fa-lg"></i>
     `;
     taskList.appendChild(li);
   });
@@ -41,3 +43,15 @@ function clearInputs() {
   document.getElementById("dueDate").value = "";
 }
 
+function deleteTask(id) {
+  tasks = tasks.filter(task => task.id !== id);
+  displayTasks();
+}
+
+function editTask(id) {
+  const taskToEdit = tasks.find(task => task.id === id);
+  document.getElementById("title").value = taskToEdit.title;
+  document.getElementById("description").value = taskToEdit.description;
+  document.getElementById("dueDate").value = taskToEdit.dueDate;
+  deleteTask(id);
+}
