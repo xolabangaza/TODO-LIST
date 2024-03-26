@@ -8,31 +8,25 @@
 
     <title>Login</title>
 </head>
-<body>
-    
+<body>  
     <div class="container">
-       <h1>Login</h3> 
-        <form>
-        <div>
-           
-        <label>Email</label> 
-        <i class="fa-solid fa-envelope" style="color: rgb(131, 25, 131)"></i>
-        
-        <input  class="input"type="email" placeholder="email" required>
-        
-          <label>Password</label>
-          <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131)" ></i>
-        
-        <input class="input" type="password" placeholder="Enter password" required>
-        
-        <input class="button"  type="submit" value="Sign Up">
-        <p class="under-thebutton">Don't have an account? <a href="./login.html">
-            Register
-           </a></p>
-        
-
+        <h1>Login</h1> 
+        <form id="loginForm">
+            <div>
+                <label>Email</label> 
+                <i class="fa-solid fa-envelope" style="color: rgb(131, 25, 131)"></i>
+                <input class="input" type="email" id="email" placeholder="Email" required>
+                
+                <label>Password</label>
+                <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131)"></i>
+                <input class="input" type="password" id="password" placeholder="Enter password" required>
+                
+                <input class="button" type="submit" value="Sign In">
+                <p class="under-thebutton">Don't have an account? <a href="./register.html">Register</a></p>
+            </div>
+        </form>
     </div>
-</form>
-</div>
+
+    <script src="./login.js"></script>
 </body>
 </html>

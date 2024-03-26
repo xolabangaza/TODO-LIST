@@ -10,32 +10,32 @@
 </head>
 <body>
     
-  <div class="container">
-       <h1>Register Here!</h3> 
-    <form>
-        <div>
-        <label>Name</label> 
-        <i class="fa-solid fa-user" style="color: rgb(131, 25, 131);"></i>
-        <input class="input" type="text"  placeholder="First Name" required>   
+    <div class="container">
+        <h1 class="register">Register Here!</h1> 
+        <form id="registerForm">
+            <div>
+                <label>Name</label> 
+                <i class="fa-solid fa-user" style="color: rgb(131, 25, 131);"></i>
+                <input class="input" type="text" id="firstName" placeholder="First Name" required>   
+    
+                <label>Surname</label>
+                <i class="fa-solid fa-user-plus" style="color: rgb(131, 25, 131);"></i>
+                <input class="input" type="text" id="surname" placeholder="Surname" required>    
+    
+                <label>Email</label> 
+                <i class="fa-solid fa-envelope" style="color: rgb(131, 25, 131);"></i>
+                <input class="input" type="email" id="email" placeholder="Email" required>
+    
+                <label>Password</label>
+                <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131);"></i>
+                <input class="input" type="password" id="password" placeholder="Enter password" required> 
+    
+                <input class="button" id="signup" type="submit" value="Sign Up">
+                <p class="under-thebutton" id="login">Already have an account? <a href="./login.html">Login</a></p>
+            </div>
+        </form>
+    </div>
 
-        <label>Surname</label>
-        <i class="fa-solid fa-user-plus" style="color: rgb(131, 25, 131);"></i>
-        <input class="input" type="text" placeholder="Surname" required>    
-
-        <label>Email</label> 
-        <i class="fa-solid fa-envelope" style="color: rgb(131, 25, 131);"></i>
-        <input  class="input"type="email" placeholder="email" required>
-
-        <label>Password</label>
-        <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131);"></i>
-        <input class="input" type="password" placeholder="Enter password" required> 
-
-        <input class="button" id="signup" type="submit" value="Sign Up">
-        <p class="under-thebutton" id="login">Already have an account?  <a href="./login.html">
-            Login
-        </a></p>
-  </div>
-</form>
-</div>
+    <script src="./reg.js"></script>
 </body>
 </html>
