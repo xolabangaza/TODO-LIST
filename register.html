@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reg.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>Sign Up</title>
 </head>
 <body>
     
-    <div class="container">
+  <div class="container">
        <h1>Register Here!</h3> 
-        <form>
+    <form>
         <div>
-        <label>Name</label>
-        
-        <input class="input" type="text"  placeholder="First Name" required>
-          
-        <label>Surname</label>
-        
-        <input class="input" type="text" placeholder="Surname" required> 
-           
-        <label>Email</label> 
-        
-        <input  class="input"type="email" placeholder="email" required>
-        
-          <label>Password</label>
-        
-        <input class="input" type="password" placeholder="Enter password" required>
-        
-        <input class="button"  type="submit" value="Sign Up">
-        <p class="under-thebutton">Already have an account? <a href="./login.html">
-            Login
-           </a></p>
-        
+        <label>Name</label> 
+        <i class="fa-solid fa-user" style="color: rgb(131, 25, 131);"></i>
+        <input class="input" type="text"  placeholder="First Name" required>   
 
-    </div>
+        <label>Surname</label>
+        <i class="fa-solid fa-user-plus" style="color: rgb(131, 25, 131);"></i>
+        <input class="input" type="text" placeholder="Surname" required>    
+
+        <label>Email</label> 
+        <i class="fa-solid fa-envelope" style="color: rgb(131, 25, 131);"></i>
+        <input  class="input"type="email" placeholder="email" required>
+
+        <label>Password</label>
+        <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131);"></i>
+        <input class="input" type="password" placeholder="Enter password" required> 
+
+        <input class="button" id="signup" type="submit" value="Sign Up">
+        <p class="under-thebutton" id="login">Already have an account?  <a href="./login.html">
+            Login
+        </a></p>
+  </div>
 </form>
 </div>
 </body>

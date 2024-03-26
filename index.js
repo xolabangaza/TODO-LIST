@@ -27,7 +27,7 @@ function displayTasks() {
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${task.title}</strong>
+      <h3><strong>${task.title}</strong></h3>
       <p>${task.description}</p>
       <p><em>Due Date: ${task.dueDate}</em></p>
       <i onclick="editTask(${task.id})" class="fa-solid fa-pen-to-square fa-lg"></i>
@@ -46,12 +46,23 @@ function clearInputs() {
 function deleteTask(id) {
   tasks = tasks.filter(task => task.id !== id);
   displayTasks();
+
 }
+
 
 function editTask(id) {
   const taskToEdit = tasks.find(task => task.id === id);
   document.getElementById("title").value = taskToEdit.title;
   document.getElementById("description").value = taskToEdit.description;
   document.getElementById("dueDate").value = taskToEdit.dueDate;
-  deleteTask(id);
+  // deleteTask(id);
+}
+
+function searchTasks() {
+  const searchInput = document.getElementById("searchInput").value.toLowerCase();
+  for (let i = 0; i < Arr.length; i++) {
+      if (Arr[i].toLowerCase().includes(searchInput)) {
+          console.log("I Found", Arr[i], "at index", i);
+      }
+  }
 }
