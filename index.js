@@ -59,10 +59,32 @@ function editTask(id) {
 }
 
 function searchTasks() {
-  const searchInput = document.getElementById("searchInput").value.toLowerCase();
-  for (let i = 0; i < Arr.length; i++) {
-      if (Arr[i].toLowerCase().includes(searchInput)) {
-          console.log("I Found", Arr[i], "at index", i);
+  const searching = document.getElementById("searching").value.toLowerCase();
+  for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].toLowerCase().includes(searching)) {
+          console.log("I Found", tasks[i], "at index", i);
+      }
+      else{
+        alert(tasks[i] + ' not found')
       }
   }
 }
+
+// function searchTasks() {
+//   const searching = document.getElementById("searching").value.toLowerCase();
+//   for (let i = 0; i < tasks.length; i++ ) {
+//     if(tasks(i) === target)
+//     console.log("I Found" , target , "at index" , i)
+//    break;
+//   }
+
+//   for (let i = 0;  i < tasks.length; i++) {
+//     if (tasks[i] === target) {
+//        console.log("Found" , target, "at index", i);
+//        break;
+//     } else{
+//        console.log("Not Found");
+//     }
+//   }
+    
+// }
