@@ -1,4 +1,3 @@
-
 let tasks = [];
 
 function addTask() {
