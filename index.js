@@ -82,12 +82,41 @@ function editTask(index) {
 }
 
 function searchTasks() {
-    const searching = document.getElementById("searching").value.toLowerCase();
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].toLowerCase().includes(searching)) {
-            console.log("I Found", tasks[i], "at index", i);
-        } else {
-            alert(tasks[i] + ' not found')
-        }
-    }
+  console.log("searchTasks function called"); // Check if the function is being called
+
+  const searchTerm = document.getElementById("searching").value.toLowerCase();
+  console.log("Search term:", searchTerm); // Check the search term
+
+  const matchingTasks = tasks.filter(task => 
+      task.title.toLowerCase().includes(searchTerm) ||
+      task.description.toLowerCase().includes(searchTerm) ||
+      task.dueDate.toLowerCase().includes(searchTerm) ||
+      task.timestamp.toLowerCase().includes(searchTerm)
+  );
+  console.log("Matching tasks:", matchingTasks); // Check the matching tasks
+
+  if (matchingTasks.length > 0) {
+      displayMatchingTasks(matchingTasks);
+  } else {
+      alert('No matching tasks found.');
+      const taskList = document.getElementById("taskList");
+      taskList.innerHTML = "";
+  }
+}
+
+function displayMatchingTasks(matchingTasks) {
+  const taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
+  matchingTasks.forEach((task, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+    <h3><strong>${task.title}</strong></h3>
+    <p>${task.description}</p>
+    <p><em>Due Date: ${task.dueDate}</em></p>
+    <p><em>Timestamp: ${task.timestamp}</em></p>
+    <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
+    <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
+  `;
+      taskList.appendChild(li);
+  });
 }
