@@ -11,7 +11,7 @@
 <body>  
     <div class="container">
         <h1>Login</h1> 
-        <form id="loginForm" action="./index2.html">
+        <form id="loginForm">
             <div>
                 <label>Email</label> 
                 <i class="fa-solid fa-envelope" style="color: rgb(131, 25, 131)"></i>
@@ -21,14 +21,38 @@
                 <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131)"></i>
                 <input class="input" type="password" id="password" placeholder="Enter password" required>
                 
-              <a href="./index.html">
                 <input class="button" type="submit" value="Sign In">
-            </a>  
+                
                 <p class="under-thebutton">Don't have an account? <a href="./register.html">Register</a></p>
             </div>
         </form>
     </div>
 
-    <script src="./login.js"></script>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Get user input values
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Retrieve users data from local storage
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Find user by email
+            const user = users.find(u => u.email === email);
+
+            // Check if user exists and password matches
+            if (user && user.password === password) {
+                // Login successful
+                alert("Login successful!");
+                // Redirect to index page
+                window.location.href = "./index2.html";
+            } else {
+                // Login failed
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+    </script>
 </body>
 </html>

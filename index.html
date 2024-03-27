@@ -12,7 +12,7 @@
     
     <div class="container">
         <h1 class="register">Register Here!</h1> 
-        <form id="registerForm" action="./login.html">
+        <form id="registerForm">
             <div>
                 <label>Name</label> 
                 <i class="fa-solid fa-user" style="color: rgb(131, 25, 131);"></i>
@@ -30,14 +30,72 @@
                 <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131);"></i>
                 <input class="input" type="password" id="password" placeholder="Enter password" required> 
     
-                 <a href="./login.html"> 
-                    <input class="button" id="signup" type="submit"  value="Sign Up" >
-                </a>
+                <input class="button" id="signup" type="submit" value="Sign Up">
                 <p class="under-thebutton" id="login">Already have an account? <a href="./login.html">Login</a></p>
             </div>
         </form>
+
+        <!-- Logout button (initially hidden) -->
+        <button id="logoutButton" style="display: none; background-color: #FF5722; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Logout</button>
     </div>
 
-    <script src="./reg.js"></script>
+    <script>
+        // Check if user is logged in and show/hide the logout button accordingly
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        console.log("Logged in user:", loggedInUser);
+
+        const logoutButton = document.getElementById("logoutButton");
+        
+        if (loggedInUser) {
+            logoutButton.style.display = "block";
+        } else {
+            logoutButton.style.display = "none";
+        }
+
+        // Add event listener to logout button
+        logoutButton.addEventListener("click", function() {
+            // Clear the logged-in user data from local storage
+            localStorage.removeItem("loggedInUser");
+            // Redirect to login page
+            window.location.href = "./login.html";
+        });
+
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Get user input values
+            const firstName = document.getElementById("firstName").value;
+            const surname = document.getElementById("surname").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Validate inputs (e.g., check for empty fields)
+
+            // Store user data in local storage
+            const userData = {
+                firstName: firstName,
+                surname: surname,
+                email: email,
+                password: password
+            };
+
+            // Check if the user already exists
+            const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+            const existingUser = existingUsers.find(user => user.email === email);
+            if (existingUser) {
+                alert("User with this email already exists. Please use a different email.");
+                return;
+            }
+
+            // Add the new user to the list of users
+            existingUsers.push(userData);
+            localStorage.setItem("users", JSON.stringify(existingUsers));
+
+            // Registration successful
+            alert("Registration successful. You can now login.");
+            // Redirect to login page
+            window.location.href = "./login.html";
+        });
+    </script>
 </body>
 </html>
