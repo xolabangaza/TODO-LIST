@@ -1,17 +1,33 @@
+
 let tasks = [];
 
 function addTask() {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
-  const dueDate = document.getElementById("dueDate").value;
+  const dueDateInput = document.getElementById("dueDate");
+  const dueDate = dueDateInput.value;
+
+  const currentDateTimeSA = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Johannesburg"}));
 
   if (title && description && dueDate) {
-    const task = { title, description, dueDate };
-    tasks.push(task);
-    displayTasks();
-    clearInputs();
+      // Check if the due date is in the past or the same as the current date
+      if (dueDate < currentDateTimeSA.toISOString().split('T')[0]) {
+          alert("Please select a due date starting from today or later.");
+          return;
+      }
+
+      const currentTimeSA = currentDateTimeSA.toLocaleTimeString('en-ZA', { timeZone: 'Africa/Johannesburg' }); // Get current time in South Africa Standard Time
+      const task = { 
+          title, 
+          description, 
+          dueDate,
+          timestamp: currentTimeSA
+      };
+      tasks.push(task);
+      displayTasks();
+      clearInputs();
   } else {
-    alert("Please fill in all fields.");
+      alert("Please fill in all fields.");
   }
 }
 
@@ -19,7 +35,7 @@ function addTask() {
 function sortTask() {
     tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
     displayTasks();
-  }
+}
 
 function displayTasks() {
   const taskList = document.getElementById("taskList");
@@ -30,33 +46,32 @@ function displayTasks() {
       <h3><strong>${task.title}</strong></h3>
       <p>${task.description}</p>
       <p><em>Due Date: ${task.dueDate}</em></p>
-      <i onclick="editTask(${task.id})" class="fa-solid fa-pen-to-square fa-lg"></i>
-      <i onclick="deleteTask(${task.id})" class="fa-solid fa-trash fa-lg"></i>
+      <p><em>Timestamp: ${task.timestamp}</em></p>
+      <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
+      <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
     `;
     taskList.appendChild(li);
   });
 }
 
 function clearInputs() {
-  document.getElementById("title").value = "";
-  document.getElementById("description").value = "";
-  document.getElementById("dueDate").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("dueDate").value = "";
 }
 
-function deleteTask(id) {
-  tasks = tasks.filter(task => task.id !== id);
-  displayTasks();
-
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    displayTasks();
 }
 
-
-function editTask(id) {
-  const taskToEdit = tasks.find(task => task.id === id);
-  document.getElementById("title").value = taskToEdit.title;
-  document.getElementById("description").value = taskToEdit.description;
-  document.getElementById("dueDate").value = taskToEdit.dueDate;
-  // deleteTask(id);
+function editTask(index) {
+    const taskToEdit = tasks[index];
+    document.getElementById("title").value = taskToEdit.title;
+    document.getElementById("description").value = taskToEdit.description;
+    document.getElementById("dueDate").value = taskToEdit.dueDate;
 }
+
 
 function searchTasks() {
   const searching = document.getElementById("searching").value.toLowerCase();
@@ -70,21 +85,21 @@ function searchTasks() {
   }
 }
 
-// function searchTasks() {
-//   const searching = document.getElementById("searching").value.toLowerCase();
-//   for (let i = 0; i < tasks.length; i++ ) {
-//     if(tasks(i) === target)
-//     console.log("I Found" , target , "at index" , i)
-//    break;
-//   }
+// // function searchTasks() {
+// //   const searching = document.getElementById("searching").value.toLowerCase();
+// //   for (let i = 0; i < tasks.length; i++ ) {
+// //     if(tasks(i) === target)
+// //     console.log("I Found" , target , "at index" , i)
+// //    break;
+// //   }
 
-//   for (let i = 0;  i < tasks.length; i++) {
-//     if (tasks[i] === target) {
-//        console.log("Found" , target, "at index", i);
-//        break;
-//     } else{
-//        console.log("Not Found");
-//     }
-//   }
+// //   for (let i = 0;  i < tasks.length; i++) {
+// //     if (tasks[i] === target) {
+// //        console.log("Found" , target, "at index", i);
+// //        break;
+// //     } else{
+// //        console.log("Not Found");
+// //     }
+// //   }
     
-// }
+// // }
