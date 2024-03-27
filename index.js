@@ -10,13 +10,13 @@ function addTask() {
   const currentDateTimeSA = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Johannesburg"}));
 
   if (title && description && dueDate) {
-      // Check if the due date is in the past or the same as the current date
+      // I'm Check if the due date is in the past or the same as the current date
       if (dueDate < currentDateTimeSA.toISOString().split('T')[0]) {
           alert("Please select a due date starting from today or later.");
           return;
       }
-
-      const currentTimeSA = currentDateTimeSA.toLocaleTimeString('en-ZA', { timeZone: 'Africa/Johannesburg' }); // Get current time in South Africa Standard Time
+       // Get current time in South Africa Standard Time
+      const currentTimeSA = currentDateTimeSA.toLocaleTimeString('en-ZA', { timeZone: 'Africa/Johannesburg' }); 
       const task = { 
           title, 
           description, 
