@@ -35,6 +35,9 @@ body {
 h1 {
   text-align: center;
 }
+h1:hover{
+  color: #9717a8;
+}
 
 .account button{
     background-color: rgb(115, 92, 141);

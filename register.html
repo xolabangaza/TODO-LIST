@@ -12,7 +12,7 @@
     
     <div class="container">
         <h1 class="register">Register Here!</h1> 
-        <form id="registerForm">
+        <form id="registerForm" action="./login.html">
             <div>
                 <label>Name</label> 
                 <i class="fa-solid fa-user" style="color: rgb(131, 25, 131);"></i>
@@ -30,7 +30,9 @@
                 <i class="fa-solid fa-lock" style="color: rgb(131, 25, 131);"></i>
                 <input class="input" type="password" id="password" placeholder="Enter password" required> 
     
-                <input class="button" id="signup" type="submit" value="Sign Up">
+                 <a href="./login.html"> 
+                    <input class="button" id="signup" type="submit"  value="Sign Up" >
+                </a>
                 <p class="under-thebutton" id="login">Already have an account? <a href="./login.html">Login</a></p>
             </div>
         </form>
