@@ -1,4 +1,4 @@
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let editingIndex = null;
 
 function addTask() {
@@ -30,10 +30,10 @@ function addTask() {
             tasks[editingIndex] = task; // Update the existing task with the new values
             editingIndex = null; // Reset editingIndex after editing is done
         } else {
-            tasks.push(task); // Add the new task to the tasks array
+            tasks.push(task); 
         }
 
-        displayTasks();
+        updateTasks();
         clearInputs();
     } else {
         alert("Please fill in all fields.");
@@ -42,7 +42,7 @@ function addTask() {
 
 function sortTask() {
     tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-    displayTasks();
+    updateTasks();
 }
 
 function displayTasks() {
@@ -70,7 +70,7 @@ function clearInputs() {
 
 function deleteTask(index) {
     tasks.splice(index, 1);
-    displayTasks();
+    updateTasks();
 }
 
 function editTask(index) {
@@ -81,42 +81,52 @@ function editTask(index) {
     editingIndex = index;
 }
 
+
+function displayTasks(taskArray = tasks) {
+  const taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
+  taskArray.forEach((task, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+          <h3><strong>${task.title}</strong></h3>
+          <p>${task.description}</p>
+          <p><em>Due Date: ${task.dueDate}</em></p>
+          <p><em>Timestamp: ${task.timestamp}</em></p>
+          <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
+          <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
+      `;
+      taskList.appendChild(li);
+  });
+}
+
 function searchTasks() {
-  console.log("searchTasks function called"); // Check if the function is being called
-
   const searchTerm = document.getElementById("searching").value.toLowerCase();
-  console.log("Search term:", searchTerm); // Check the search term
-
   const matchingTasks = tasks.filter(task => 
       task.title.toLowerCase().includes(searchTerm) ||
       task.description.toLowerCase().includes(searchTerm) ||
       task.dueDate.toLowerCase().includes(searchTerm) ||
       task.timestamp.toLowerCase().includes(searchTerm)
   );
-  console.log("Matching tasks:", matchingTasks); // Check the matching tasks
 
   if (matchingTasks.length > 0) {
-      displayMatchingTasks(matchingTasks);
+      displayTasks(matchingTasks);
   } else {
       alert('No matching tasks found.');
-      const taskList = document.getElementById("taskList");
-      taskList.innerHTML = "";
+      displayTasks(); // Display all tasks if no matching tasks found
   }
 }
 
-function displayMatchingTasks(matchingTasks) {
-  const taskList = document.getElementById("taskList");
-  taskList.innerHTML = "";
-  matchingTasks.forEach((task, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-    <h3><strong>${task.title}</strong></h3>
-    <p>${task.description}</p>
-    <p><em>Due Date: ${task.dueDate}</em></p>
-    <p><em>Timestamp: ${task.timestamp}</em></p>
-    <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
-    <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
-  `;
-      taskList.appendChild(li);
-  });
+function updateTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    displayTasks();
 }
+
+// Load tasks when the page loads
+window.addEventListener('load', function() {
+    displayTasks();
+});
+
+// Save tasks to local storage before the page unloads
+window.addEventListener('beforeunload', function() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+});
