@@ -130,3 +130,28 @@ window.addEventListener('load', function() {
 window.addEventListener('beforeunload', function() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 });
+
+
+ // Check if user is logged in and show/hide the logout button accordingly
+ const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+ const logoutButton = document.getElementById("logoutButton");
+
+ console.log("Logged In User:", loggedInUser); // Debug statement
+
+ if (loggedInUser) {
+     logoutButton.style.display = "flex";
+ } else {
+     logoutButton.style.display = "none";
+ }
+
+ // Add event listener to logout button
+ logoutButton.addEventListener("click", function() {
+     console.log("Logout Button Clicked"); // Debug statement
+
+     // Clear the logged-in user data from local storage
+     localStorage.removeItem("loggedInUser");
+     console.log("Logged Out"); // Debug statement
+     
+     // Redirect to login page or perform any other logout actions
+     window.location.href = "./login.html"; // Redirect to login page
+ });

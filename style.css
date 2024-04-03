@@ -62,9 +62,7 @@ h1:hover{
  }
   
   
-  input[type="text"],
-  textarea,
-  input[type="date"],
+  input[type="text"],textarea,input[type="date"],
   button {
     display: block;
     width: 100%;
