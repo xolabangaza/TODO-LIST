@@ -183,14 +183,15 @@ const logoutButton = document.getElementById("logoutButton");
 
 console.log("Logged In User:", loggedInUser); 
 
-if (loggedInUser) {
-    logoutButton.style.display = "flex";
-} else {
-    logoutButton.style.display = "none";
-}
+// if (loggedInUser) {
+//     logoutButton.style.display = "flex";
+// } else {
+//     logoutButton.style.display = "none";
+// }
 
 
 logoutButton.addEventListener("click", function() {
+    alert('You logged out')
     console.log("Logout Button Clicked");
 
     

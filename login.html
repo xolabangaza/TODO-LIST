@@ -36,13 +36,16 @@
             
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
-
+            // const userData = {
+            //     email: email,
+            //     password: password
+            // };
             // Retrieve users data from local storage
             const users = JSON.parse(localStorage.getItem("users")) || [];
-
+    
             // Find user by email
             const user = users.find(u => u.email === email);
-
+           
             // Check if user exists and password matches
             if (user && user.password === password) {
                 // Login successful
