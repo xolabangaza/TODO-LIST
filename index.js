@@ -16,17 +16,17 @@ function addTask() {
             return;
         }
 
-        
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
         const currentTimeSA = currentDateTimeSA.toLocaleTimeString('en-ZA', { timeZone: 'Africa/Johannesburg' });
         const task = {
             title,
             description,
             dueDate,
-            timestamp: currentTimeSA
+            timestamp: currentTimeSA,
+            user: loggedInUser
         };
 
         if (editingIndex !== null) {
-            
             tasks[editingIndex] = task; 
             editingIndex = null; 
         } else {
@@ -41,13 +41,30 @@ function addTask() {
     }
 }
 
+function displayTasks(taskArray = tasks) {
+    const taskList = document.getElementById("taskList");
+    taskList.innerHTML = "";
+    
+    taskArray.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <h3><strong>${task.title}</strong></h3>
+          <p>${task.description}</p>
+          <p><em>Due Date: ${task.dueDate}</em></p>
+          <p><em>Timestamp: ${task.timestamp}</em></p>
+          <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
+          <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
+        `;
+        taskList.appendChild(li);
+    });
+}
+
 function setRemindersForTasks() {
     tasks.forEach(task => {
         const dueDate = new Date(task.dueDate);
         const timeUntilDue = dueDate - new Date(); 
         const reminderTime = 24 * 60 * 60 * 1000; 
 
-        
         if (timeUntilDue > 0 && timeUntilDue <= reminderTime) {
             const reminderDelay = timeUntilDue - reminderTime; 
             setTimeout(() => {
@@ -58,11 +75,9 @@ function setRemindersForTasks() {
 }
 
 function showReminder(task) {
-    
     alert(`Reminder: Task "${task.title}" is due on ${task.dueDate}`);
 }
 
-// Function to show tasks due soon when reminder icon is clicked
 function showDueTasks() {
     const now = new Date();
     const soonTasks = tasks.filter(task => {
@@ -79,31 +94,12 @@ function showDueTasks() {
     }
 }
 
-
 const reminderIcon = document.getElementById("reminderIcon");
 reminderIcon.addEventListener("click", showDueTasks);
-
 
 function sortTask() {
     tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
     updateTasks();
-}
-
-function displayTasks() {
-    const taskList = document.getElementById("taskList");
-    taskList.innerHTML = "";
-    tasks.forEach((task, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-      <h3><strong>${task.title}</strong></h3>
-      <p>${task.description}</p>
-      <p><em>Due Date: ${task.dueDate}</em></p>
-      <p><em>Timestamp: ${task.timestamp}</em></p>
-      <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
-      <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
-    `;
-        taskList.appendChild(li);
-    });
 }
 
 function clearInputs() {
@@ -125,40 +121,21 @@ function editTask(index) {
     editingIndex = index;
 }
 
-
-function displayTasks(taskArray = tasks) {
-  const taskList = document.getElementById("taskList");
-  taskList.innerHTML = "";
-  taskArray.forEach((task, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-          <h3><strong>${task.title}</strong></h3>
-          <p>${task.description}</p>
-          <p><em>Due Date: ${task.dueDate}</em></p>
-          <p><em>Timestamp: ${task.timestamp}</em></p>
-          <i onclick="editTask(${index})" class="fa-solid fa-pen-to-square fa-lg"></i>
-          <i onclick="deleteTask(${index})" class="fa-solid fa-trash fa-lg"></i>
-      `;
-      taskList.appendChild(li);
-  });
-}
-
 function searchTasks() {
-  const searchTerm = document.getElementById("searching").value.toLowerCase();
-  const matchingTasks = tasks.filter(task => 
-      task.title.toLowerCase().includes(searchTerm) ||
-      task.description.toLowerCase().includes(searchTerm) ||
-      task.dueDate.toLowerCase().includes(searchTerm) ||
-      task.timestamp.toLowerCase().includes(searchTerm)
-  );
+    const searchTerm = document.getElementById("searching").value.toLowerCase();
+    const matchingTasks = tasks.filter(task => 
+        task.title.toLowerCase().includes(searchTerm) ||
+        task.description.toLowerCase().includes(searchTerm) ||
+        task.dueDate.toLowerCase().includes(searchTerm) ||
+        task.timestamp.toLowerCase().includes(searchTerm)
+    );
 
-  if (matchingTasks.length > 0) {
-      displayTasks(matchingTasks);
-  } else {
-      alert('No matching tasks found.');
-      
-      displayTasks(); 
-  }
+    if (matchingTasks.length > 0) {
+        displayTasks(matchingTasks);
+    } else {
+        alert('No matching tasks found.');
+        displayTasks(); 
+    }
 }
 
 function updateTasks() {
@@ -166,17 +143,14 @@ function updateTasks() {
     displayTasks();
 }
 
-
 window.addEventListener('load', function() {
     displayTasks();
     setRemindersForTasks(); 
 });
 
-
 window.addEventListener('beforeunload', function() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 });
-
 
 const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 const logoutButton = document.getElementById("logoutButton");
@@ -187,17 +161,13 @@ console.log("Logged In User:", loggedInUser);
 //     logoutButton.style.display = "flex";
 // } else {
 //     logoutButton.style.display = "none";
-// }
-
+// } 
 
 logoutButton.addEventListener("click", function() {
     alert('You logged out')
     console.log("Logout Button Clicked");
 
-    
     localStorage.removeItem("loggedInUser");
     console.log("Logged Out"); 
-     
-    
     window.location.href = "./login.html"; 
 });
