@@ -7,6 +7,10 @@
     background-color: #9b8daa;
  }
  
+ .login{
+   transform: translateY(-180px);
+   transition: .8s ease-in-out;
+ }
 
  .container{
     margin: auto;
@@ -54,6 +58,8 @@
     margin-top: 15px; 
     margin-left: 20px; 
     margin-bottom: 10px; 
+    transition: .2s ease-in;
+    cursor: pointer;
  }
 
  .button:hover{
@@ -63,15 +69,14 @@
 
  
 
- /* ::-webkit-input-placeholder{
-    text-align: center;
-    color: rgb(194, 84, 166);
- } */
+
  label{
     margin-left: 30px;
     font-size: 20px;
     color: rgb(53, 8, 49);
     font-style: oblique;
+    cursor: pointer;
+    transition: .5s ease-in-out;
 
  }
  .under-thebutton{

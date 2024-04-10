@@ -1,11 +1,4 @@
-// const logoutBtn = document.querySelector(	`.logout-btn`);
-
-// logoutBtn.addEventListener(	'click', () => {
-//     window.location.replace("login.html")
-// })
-
-// document.getElementById('registerForm').addEventListener('submit', function(event) {
-    // Prevent the default form submission
+// Prevent the default form submission
     function validateForm(event){
     event.preventDefault();
 

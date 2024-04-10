@@ -1,5 +1,5 @@
 document.getElementById('signup,login').addEventListener('click', function(event) {
-    // Redirect to the login page when the "Sign Up" button is clicked
+    
     window.location.href = "./login.html";
     window.location.href = "./index.html";
     event.preventDefault();

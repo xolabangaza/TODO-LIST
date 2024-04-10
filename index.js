@@ -10,13 +10,13 @@ function addTask() {
     const currentDateTimeSA = new Date(new Date().toLocaleString("en-US", { timeZone: "Africa/Johannesburg" }));
 
     if (title && description && dueDate) {
-        // Check if the due date is in the past or the same as the current date
+        
         if (dueDate < currentDateTimeSA.toISOString().split('T')[0]) {
             alert("Please select a due date starting from today or later.");
             return;
         }
 
-        // Get current time in South Africa Standard Time
+        
         const currentTimeSA = currentDateTimeSA.toLocaleTimeString('en-ZA', { timeZone: 'Africa/Johannesburg' });
         const task = {
             title,
@@ -26,19 +26,63 @@ function addTask() {
         };
 
         if (editingIndex !== null) {
-            // If editingIndex is not null, it means we are editing an existing task
-            tasks[editingIndex] = task; // Update the existing task with the new values
-            editingIndex = null; // Reset editingIndex after editing is done
+            
+            tasks[editingIndex] = task; 
+            editingIndex = null; 
         } else {
             tasks.push(task); 
         }
 
         updateTasks();
+        setRemindersForTasks(); 
         clearInputs();
     } else {
         alert("Please fill in all fields.");
     }
 }
+
+function setRemindersForTasks() {
+    tasks.forEach(task => {
+        const dueDate = new Date(task.dueDate);
+        const timeUntilDue = dueDate - new Date(); 
+        const reminderTime = 24 * 60 * 60 * 1000; 
+
+        
+        if (timeUntilDue > 0 && timeUntilDue <= reminderTime) {
+            const reminderDelay = timeUntilDue - reminderTime; 
+            setTimeout(() => {
+                showReminder(task);
+            }, reminderDelay);
+        }
+    });
+}
+
+function showReminder(task) {
+    
+    alert(`Reminder: Task "${task.title}" is due on ${task.dueDate}`);
+}
+
+// Function to show tasks due soon when reminder icon is clicked
+function showDueTasks() {
+    const now = new Date();
+    const soonTasks = tasks.filter(task => {
+        const dueDate = new Date(task.dueDate);
+        const timeUntilDue = dueDate - now; // Time difference in milliseconds
+        const reminderTime = 24 * 60 * 60 * 1000; // 1 day before due date (adjust as needed)
+        return timeUntilDue > 0 && timeUntilDue <= reminderTime;
+    });
+
+    if (soonTasks.length > 0) {
+        alert("Tasks due soon:\n" + soonTasks.map(task => `${task.title} - Due: ${task.dueDate}`).join("\n"));
+    } else {
+        alert("No tasks due soon.");
+    }
+}
+
+
+const reminderIcon = document.getElementById("reminderIcon");
+reminderIcon.addEventListener("click", showDueTasks);
+
 
 function sortTask() {
     tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
@@ -112,7 +156,8 @@ function searchTasks() {
       displayTasks(matchingTasks);
   } else {
       alert('No matching tasks found.');
-      displayTasks(); // Display all tasks if no matching tasks found
+      
+      displayTasks(); 
   }
 }
 
@@ -121,37 +166,37 @@ function updateTasks() {
     displayTasks();
 }
 
-// Load tasks when the page loads
+
 window.addEventListener('load', function() {
     displayTasks();
+    setRemindersForTasks(); 
 });
 
-// Save tasks to local storage before the page unloads
+
 window.addEventListener('beforeunload', function() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 });
 
 
- // Check if user is logged in and show/hide the logout button accordingly
- const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
- const logoutButton = document.getElementById("logoutButton");
+const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+const logoutButton = document.getElementById("logoutButton");
 
- console.log("Logged In User:", loggedInUser); // Debug statement
+console.log("Logged In User:", loggedInUser); 
 
- if (loggedInUser) {
-     logoutButton.style.display = "flex";
- } else {
-     logoutButton.style.display = "none";
- }
+if (loggedInUser) {
+    logoutButton.style.display = "flex";
+} else {
+    logoutButton.style.display = "none";
+}
 
- // Add event listener to logout button
- logoutButton.addEventListener("click", function() {
-     console.log("Logout Button Clicked"); // Debug statement
 
-     // Clear the logged-in user data from local storage
-     localStorage.removeItem("loggedInUser");
-     console.log("Logged Out"); // Debug statement
+logoutButton.addEventListener("click", function() {
+    console.log("Logout Button Clicked");
+
+    
+    localStorage.removeItem("loggedInUser");
+    console.log("Logged Out"); 
      
-     // Redirect to login page or perform any other logout actions
-     window.location.href = "./login.html"; // Redirect to login page
- });
+    
+    window.location.href = "./login.html"; 
+});
